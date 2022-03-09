@@ -4,7 +4,7 @@ import {
   fromFileUrl,
   join,
 } from "https://deno.land/std@0.128.0/path/mod.ts";
-import { createPullRequestsByLog } from "../src/stat-command.ts";
+import { createPullRequestsByLog, createStat } from "../src/stat-command.ts";
 
 Deno.test("can make stat by simple-log", () => {
   const path = join(
@@ -12,7 +12,7 @@ Deno.test("can make stat by simple-log", () => {
     "../testdata/simple-log.json",
   );
   const prs = createPullRequestsByLog(path);
-  // const stat = createStat(prs);
+  const stat = createStat(prs);
   // assertEquals(
   //   stat,
   //   toMatchInlineSnapshot(`
