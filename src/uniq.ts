@@ -1,1 +1,3 @@
-export function uniq() {}
+export function uniq() {
+  return "hoge";
+}
