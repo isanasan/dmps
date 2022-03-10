@@ -13,25 +13,24 @@ Deno.test("can make stat by simple-log", () => {
   );
   const prs = createPullRequestsByLog(path);
   const stat = createStat(prs);
-  // assertEquals(
-  //   stat,
-  //   toMatchInlineSnapshot(`
-  //     Object {
-  //       "additionsAverage": 260,
-  //       "additionsMedian": 92.5,
-  //       "authorCount": 3,
-  //       "count": 4,
-  //       "deletionsAverage": 70.75,
-  //       "deletionsMedian": 23.5,
-  //       "leadTimeSecondsAverage": 2911116,
-  //       "leadTimeSecondsMedian": 658212,
-  //       "timeToMergeFromFirstReviewSecondsAverage": 454493,
-  //       "timeToMergeFromFirstReviewSecondsMedian": 454493,
-  //       "timeToMergeSecondsAverage": 2591489,
-  //       "timeToMergeSecondsMedian": 549684,
-  //     }
-  //   `),
-  // );
+
+  assertEquals(
+    stat,
+    {
+      "additionsAverage": 260,
+      "additionsMedian": 92.5,
+      "authorCount": 3,
+      "count": 4,
+      "deletionsAverage": 70.75,
+      "deletionsMedian": 23.5,
+      "leadTimeSecondsAverage": 2911116,
+      "leadTimeSecondsMedian": 658212,
+      "timeToMergeFromFirstReviewSecondsAverage": 454493,
+      "timeToMergeFromFirstReviewSecondsMedian": 454493,
+      "timeToMergeSecondsAverage": 2591489,
+      "timeToMergeSecondsMedian": 549684,
+    },
+  );
 });
 
 // describe("createStat", () => {
