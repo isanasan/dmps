@@ -1,6 +1,5 @@
 import { PullRequest } from "./entity.ts";
 import { median as _median } from "https://esm.sh/mathjs";
-import * as _ from "https://deno.land/x/lodash@4.17.19/lodash.js";
 
 export function createPullRequestsByLog(path: string): PullRequest[] {
   const logs = JSON.parse(Deno.readTextFileSync(path));
@@ -44,7 +43,7 @@ export function createStat(prs: PullRequest[]): PullRequestStat {
 
   return {
     count: prs.length,
-    authorCount: _.uniq(prs.map((pr) => pr.author)).length,
+    authorCount: uniq(prs.map((pr) => pr.author)).length,
     additionsAverage: average(prs.map((pr) => pr.additions)),
     additionsMedian: median(prs.map((pr) => pr.additions)),
     deletionsAverage: average(prs.map((pr) => pr.deletions)),
@@ -70,4 +69,18 @@ function average(numbers: number[]): number {
 function median(numbers: number[]): number {
   if (numbers.length === 0) return 0;
   return _median(numbers);
+}
+
+function uniq(targetArray: string[]): string[] {
+  let size = targetArray.length;
+  for (let i = 0; i < size - 1; i++) {
+    for (let j = i + 1; j < size; j++) {
+      if (targetArray[i] === targetArray[j]) {
+        targetArray.splice(j, 1);
+        size--;
+        j--;
+      }
+    }
+  }
+  return targetArray;
 }
