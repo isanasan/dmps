@@ -1,3 +1,3 @@
-export function uniq(hoge: string): string {
+export function uniq(hoge: string[]): string[] {
   return hoge;
 }
