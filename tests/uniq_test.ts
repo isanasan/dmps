@@ -13,3 +13,10 @@ Deno.test("multi", () => {
     uniq(["hoge", "huga", "hoge", "huga", "hoge"]),
   );
 });
+
+Deno.test("dubble", () => {
+  assertEquals(
+    ["hoge", "huga"],
+    uniq(["hoge", "hoge", "huga", "huga"]),
+  );
+});
