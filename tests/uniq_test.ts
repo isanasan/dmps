@@ -5,4 +5,9 @@ Deno.test("uniq test", () => {
     ["hoge", "huga"],
     uniq(["hoge", "huga", "hoge", "huga", "hoge"]),
   );
+
+  assertEquals(
+    ["hoge", "huga"],
+    uniq(["hoge", "huga", "hoge"]),
+  );
 });
