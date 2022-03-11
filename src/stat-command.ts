@@ -1,5 +1,31 @@
 import { PullRequest } from "./entity.ts";
 import { median as _median } from "https://esm.sh/mathjs";
+import { fetchAllMergedPullRequests } from "./github.ts";
+
+interface StatCommandOptions {
+  input: string | undefined;
+  start: string | undefined;
+  end: string | undefined;
+  query: string | undefined;
+}
+export async function statCommand(options: StatCommandOptions): Promise<void> {
+  let prs: PullRequest[] = [];
+
+  if (options.query) {
+    prs = await fetchAllMergedPullRequests(
+      options.query,
+      options.start,
+      options.end,
+    );
+  } else if (options.input) {
+    prs = createPullRequestsByLog(options.input);
+  } else {
+    console.error("You must specify either --query or --input");
+    Deno.exit(1);
+  }
+
+  console.log(JSON.stringify(createStat(prs), undefined, 2));
+}
 
 export function createPullRequestsByLog(path: string): PullRequest[] {
   const logs = JSON.parse(Deno.readTextFileSync(path));
@@ -71,16 +97,18 @@ function median(numbers: number[]): number {
   return _median(numbers);
 }
 
-function uniq(targetArray: string[]): string[] {
-  let size = targetArray.length;
+function uniq(targetArray: Array<string | null>): Array<unknown> {
+  const filted = targetArray.filter((v) => v);
+
+  let size = filted.length;
   for (let i = 0; i < size - 1; i++) {
     for (let j = i + 1; j < size; j++) {
-      if (targetArray[i] === targetArray[j]) {
-        targetArray.splice(j, 1);
+      if (filted[i] === filted[j]) {
+        filted.splice(j, 1);
         size--;
         j--;
       }
     }
   }
-  return targetArray;
+  return filted;
 }
