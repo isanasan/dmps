@@ -1,6 +1,6 @@
 import { Command } from "https://deno.land/x/cliffy@v0.20.1/command/mod.ts";
-import { logCommand } from "./log-command.ts";
-import { statCommand } from "./stat-command.ts";
+import { logCommand } from "./src/log-command.ts";
+import { statCommand } from "./src/stat-command.ts";
 
 async function main(): Promise<void> {
   const program = await new Command()
