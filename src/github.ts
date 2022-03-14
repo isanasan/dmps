@@ -1,4 +1,7 @@
-import { gql, GraphQLClient } from "https://esm.sh/graphql-request";
+import {
+  gql,
+  GraphQLClient,
+} from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
 import { PullRequest } from "./entity.ts";
 import parseISO from "https://deno.land/x/date_fns@v2.22.1/parseISO/index.js";
 
