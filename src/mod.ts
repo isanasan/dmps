@@ -10,7 +10,7 @@ async function main(): Promise<void> {
     .option("--input <filepath>", "the input file path")
     .option("--start <date>", "start date")
     .option("--end <date>", "end date")
-    .option("--query <string>", "search query")
+    .option("--query <string>", "search query", { required: true })
     .action(statCommand);
 
   program
