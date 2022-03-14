@@ -7,7 +7,6 @@ async function main(): Promise<void> {
     .version("0.1.0");
 
   program
-    .command("stat")
     .option("--input <filepath>", "the input file path")
     .option("--start <date>", "start date")
     .option("--end <date>", "end date")
