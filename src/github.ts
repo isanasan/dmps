@@ -15,7 +15,6 @@ export const graphQLClient = new GraphQLClient(GITHUB_GRAPHQL_ENDPOINT, {
   headers: {
     authorization: `Bearer ${GITHUB_TOKEN}`,
   },
-  timeout: 3600_000,
 });
 
 export function fetchAllMergedPullRequests(
