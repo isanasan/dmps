@@ -4,7 +4,8 @@ import {
   fromFileUrl,
   join,
 } from "https://deno.land/std@0.128.0/path/mod.ts";
-import { createPullRequestsByLog, createStat } from "../src/stat-command.ts";
+import { createPullRequestsByLog } from "../src/commands/stat-command.ts";
+import { createStat } from "../src/create-stat.ts";
 
 Deno.test("can make stat by simple-log", () => {
   const path = join(
