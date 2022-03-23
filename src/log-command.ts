@@ -17,38 +17,40 @@ export async function logCommand(options: LogCommandOptions): Promise<void> {
   if (options.format === "json") {
     console.log(JSON.stringify(prs, undefined, 2));
   } else if (options.format === "csv") {
-    console.log(csvStringify(
-      prs.map((pr) => {
-        return {
-          leadTimeSeconds: pr.leadTimeSeconds,
-          timeToMergeSeconds: pr.timeToMergeSeconds,
-          timeToMergeFromFirstReviewSeconds:
-            pr.timeToMergeFromFirstReviewSeconds,
-          title: pr.title,
-          author: pr.author,
-          url: pr.url,
-          createdAt: pr.createdAt,
-          mergedAt: pr.mergedAt,
-          additions: pr.additions,
-          deletions: pr.deletions,
-          authoredDate: pr.authoredDate,
-          firstReviewedAt: pr.firstReviewedAt,
-        };
-      }),
-      [
-        "leadTimeSeconds",
-        "timeToMergeSeconds",
-        "timeToMergeFromFirstReviewSeconds",
-        "author",
-        "url",
-        "createdAt",
-        "mergedAt",
-        "additions",
-        "deletions",
-        "authoredDate",
-        "firstReviewedAt",
-      ],
-    ));
+    console.log(
+      await csvStringify(
+        prs.map((pr) => {
+          return {
+            leadTimeSeconds: pr.leadTimeSeconds,
+            timeToMergeSeconds: pr.timeToMergeSeconds,
+            timeToMergeFromFirstReviewSeconds:
+              pr.timeToMergeFromFirstReviewSeconds,
+            title: pr.title,
+            author: pr.author,
+            url: pr.url,
+            createdAt: pr.createdAt,
+            mergedAt: pr.mergedAt,
+            additions: pr.additions,
+            deletions: pr.deletions,
+            authoredDate: pr.authoredDate,
+            firstReviewedAt: pr.firstReviewedAt,
+          };
+        }),
+        [
+          "leadTimeSeconds",
+          "timeToMergeSeconds",
+          "timeToMergeFromFirstReviewSeconds",
+          "author",
+          "url",
+          "createdAt",
+          "mergedAt",
+          "additions",
+          "deletions",
+          "authoredDate",
+          "firstReviewedAt",
+        ],
+      ),
+    );
   } else {
     console.error("--format can be csv or json only");
     Deno.exit(1);
