@@ -30,7 +30,7 @@ async function main(): Promise<void> {
     .action(intervalCommand);
 
   await new Command()
-    .version("0.1.0")
+    .version("0.2.0")
     .option("--input <filepath>", "the input file path")
     .option("--start <date>", "start date", { required: true })
     .option("--end <date>", "end date", { required: true })
