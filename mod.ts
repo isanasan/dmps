@@ -1,6 +1,7 @@
 import { Command } from "https://deno.land/x/cliffy@v0.20.1/command/mod.ts";
 import { logCommand } from "./src/commands/log-command.ts";
 import { statCommand } from "./src/commands/stat-command.ts";
+import { intervalCommand } from "./src/commands/interval-command.ts";
 
 async function main(): Promise<void> {
   const log = new Command()
@@ -26,9 +27,7 @@ async function main(): Promise<void> {
     .option("--end <date>", "end date", { required: true })
     .option("--interval-days <date>", "interval date", { required: true })
     .option("--query <string>", "query for github search", { required: true })
-    .action((intervalCommand) => {
-      console.log("interval");
-    });
+    .action(intervalCommand);
 
   await new Command()
     .version("0.1.0")
