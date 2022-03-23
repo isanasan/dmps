@@ -1,4 +1,4 @@
-import { fetchAllMergedPullRequests } from "./github.ts";
+import { fetchAllMergedPullRequests } from "../github.ts";
 import { stringify as csvStringify } from "https://deno.land/std@0.129.0/encoding/csv.ts";
 
 interface LogCommandOptions {

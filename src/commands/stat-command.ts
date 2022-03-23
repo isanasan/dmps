@@ -1,6 +1,6 @@
-import { PullRequest } from "./entity.ts";
-import { fetchAllMergedPullRequests } from "./github.ts";
-import { createStat } from "./create-stat.ts";
+import { PullRequest } from "../entity.ts";
+import { fetchAllMergedPullRequests } from "../github.ts";
+import { createStat } from "../create-stat.ts";
 
 interface StatCommandOptions {
   input: string | undefined;
