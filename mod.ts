@@ -14,6 +14,13 @@ async function main(): Promise<void> {
     )
     .action(logCommand);
 
+  const stat = new Command()
+    .option("--input <filepath>", "the input file path")
+    .option("--start <date>", "start date", { required: true })
+    .option("--end <date>", "end date", { required: true })
+    .option("--query <string>", "search query", { required: true })
+    .action(statCommand);
+
   await new Command()
     .version("0.1.0")
     .option("--input <filepath>", "the input file path")
@@ -22,6 +29,7 @@ async function main(): Promise<void> {
     .option("--query <string>", "search query", { required: true })
     .action(statCommand)
     .command("log", log)
+    .command("stat", stat)
     .parse(Deno.args);
 }
 
