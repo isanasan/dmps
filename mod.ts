@@ -14,16 +14,15 @@ async function main(): Promise<void> {
     )
     .action(logCommand);
 
-  const program = await new Command()
+  await new Command()
     .version("0.1.0")
     .option("--input <filepath>", "the input file path")
     .option("--start <date>", "start date")
     .option("--end <date>", "end date")
     .option("--query <string>", "search query", { required: true })
     .action(statCommand)
-    .command("log", log);
-
-  program.parse(Deno.args);
+    .command("log", log)
+    .parse(Deno.args);
 }
 
 main().catch((error) => console.error(error));
