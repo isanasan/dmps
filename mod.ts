@@ -15,9 +15,7 @@ async function main(): Promise<void> {
     .action(logCommand);
 
   const program = await new Command()
-    .version("0.1.0");
-
-  program
+    .version("0.1.0")
     .option("--input <filepath>", "the input file path")
     .option("--start <date>", "start date")
     .option("--end <date>", "end date")
