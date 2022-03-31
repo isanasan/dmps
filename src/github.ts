@@ -113,9 +113,9 @@ async function fetchAllPullRequestsByQuery(
 
   let after: string | undefined;
   let prs: PullRequest[] = [];
-  while (true) {
-    const data = await graphQLClient.request(query, { after });
-    prs = prs.concat(
+
+  const prMapping = function (data: any): PullRequest[] {
+    return prs.concat(
       data.search.nodes.map(
         (p: PullRequestNode) =>
           new PullRequest(
@@ -131,6 +131,11 @@ async function fetchAllPullRequestsByQuery(
           ),
       ),
     );
+  };
+
+  while (true) {
+    const data = await graphQLClient.request(query, { after });
+    prs = prMapping(data);
 
     if (!data.search.pageInfo.hasNextPage) break;
 
