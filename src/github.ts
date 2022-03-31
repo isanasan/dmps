@@ -134,14 +134,14 @@ async function fetchAllPullRequestsByQuery(
   };
 
   while (true) {
-    const data = await graphQLClient.request(query, { after });
-    prs = prMapping(data);
-
-    if (!data.search.pageInfo.hasNextPage) break;
-
-    // console.error(JSON.stringify(data, undefined, 2));
-
-    after = data.search.pageInfo.endCursor;
+    try {
+      const data = await graphQLClient.request(query, { after });
+      prs = prMapping(data);
+      if (!data.search.pageInfo.hasNextPage) break;
+      after = data.search.pageInfo.endCursor;
+    } catch (error) {
+      /* console.error(JSON.stringify(error, undefined, 2)); */
+    }
   }
 
   return prs;
