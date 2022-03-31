@@ -113,7 +113,6 @@ async function fetchAllPullRequestsByQuery(
 
   let after: string | undefined;
   let prs: PullRequest[] = [];
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     const data = await graphQLClient.request(query, { after });
     prs = prs.concat(
