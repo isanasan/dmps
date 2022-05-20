@@ -1,4 +1,5 @@
 import {
+  ClientError,
   gql,
   GraphQLClient,
 } from "https://deno.land/x/graphql_request@v4.1.0/mod.ts";
@@ -145,7 +146,16 @@ async function fetchAllPullRequestsByQuery(
       if (!data.search.pageInfo.hasNextPage) break;
       after = data.search.pageInfo.endCursor;
     } catch (error) {
-      /* console.error(JSON.stringify(error, undefined, 2)); */
+      if (error instanceof ClientError) {
+        switch (error.response.status) {
+          case 401:
+            console.error(JSON.stringify(error, undefined, 2));
+            Deno.exit(1);
+        }
+      } else {
+        console.error(JSON.stringify(error, undefined, 2));
+        Deno.exit(1);
+      }
     }
   }
 
