@@ -11,6 +11,11 @@ const GITHUB_GRAPHQL_ENDPOINT = Deno.env.get("GITHUB_ENDPOINT") ||
   "https://api.github.com/graphql";
 const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN");
 
+if (GITHUB_TOKEN === undefined) {
+  console.error("require GITHUB_TOKEN");
+  Deno.exit(1);
+}
+
 export const graphQLClient = new GraphQLClient(GITHUB_GRAPHQL_ENDPOINT, {
   headers: {
     authorization: `Bearer ${GITHUB_TOKEN}`,
